@@ -3,7 +3,7 @@
 ## Clonar un Repositorio
 Para obtener una copia local de un repositorio alojado en GitHub, usar:
 ```sh
-git clone https://github.com/usuario/repo.git
+git clone https://github.com/andresf91/pav-laboratorios.git
 ```
 
 ## Agregar, Confirmar y Enviar Cambios
@@ -49,7 +49,7 @@ git push -u origin nombre-de-la-rama
 ```
 
 ## Editar en Codespaces
-1. En GitHub, abrir el repositorio y hacer clic en el botón **"Code"**.
+1. En GitHub, abrir el repositorio y hacer clic en el botón verde **"<>"**.
 2. Seleccionar **"Codespaces"** y crear un nuevo espacio.
 3. Editar los archivos directamente desde la interfaz de Visual Studio Code en el navegador.
 4. Usar el terminal integrado para ejecutar comandos Git como `add`, `commit` y `push`.
