@@ -11,15 +11,15 @@ class Fecha;
 
 class Consulta{
     private:
-        Fecha fechaConsulta;
+        dtFecha fechaConsulta;
         string motivo;
         Socio* socio; // Socio al que pertenece
     public:
         // Consulta(); // Constructor por defecto
-        Consulta(Fecha, string, Socio*); // Constructor por pasaje de parámetros
+        Consulta(dtFecha, string, Socio*); // Constructor por pasaje de parámetros
         Consulta(const Consulta&); // Constructor de copia
         // Getters
-        Fecha& getFecha();
+        dtFecha& getFecha();
         string getMotivo();
         Socio* getSocio();
         void imprimirConsulta();

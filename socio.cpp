@@ -3,9 +3,9 @@
 #include "consulta.h"
 #include <stdexcept> // Para std::runtime_error
 
-Socio::Socio() : ci(""), nombre(""), fechaIngreso(Fecha(1,1,2025)), numMascotas(0), numConsultas(0){}
+Socio::Socio() : ci(""), nombre(""), fechaIngreso(dtFecha(1,1,2025)), numMascotas(0), numConsultas(0){}
 
-Socio::Socio(std::string _ci, std::string _nombre, Fecha _fecha): ci(_ci), nombre(_nombre), fechaIngreso(_fecha), numMascotas(0), numConsultas(0) {}
+Socio::Socio(std::string _ci, std::string _nombre, dtFecha _fecha): ci(_ci), nombre(_nombre), fechaIngreso(_fecha), numMascotas(0), numConsultas(0) {}
 
 string Socio::getCi(){
 	return this->ci;
@@ -31,9 +31,10 @@ int Socio::getNumConsultas(){
 	return numConsultas;
 }
 
-void Socio::push_back(Mascota* mascota) {
+void Socio::push_back(Mascota* mascota){
+    Mascota* ptrMascota= mascota;
     if (numMascotas < MAX_MASCOTAS) {
-        mascotas[numMascotas] = mascota;
+        mascotas[numMascotas] = ptrMascota;
         numMascotas++;
     } else {
         throw std::runtime_error("No hay espacio para más mascotas");

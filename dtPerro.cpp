@@ -3,22 +3,17 @@
 
 using namespace std;
 
-void dtPerro::infoMascota(){
-	dtMascota::infoMascota();
-	cout << "Tiene vacuna del Cachorro: ";
-	if (getVacuna())
-	{
-		cout << "Si" << endl;
-	}else{
-		cout << "No" << endl;
-	}
-}
 
 // PERRO
 
-dtPerro::dtPerro(string _nombre, Genero _genero,RazaPerro _raza, bool _vacuna):dtMascota(_nombre, _genero){
+dtPerro::dtPerro(string _nombre, Genero _genero, float _peso,RazaPerro _raza, bool _vacuna):dtMascota(_nombre, _genero, _peso){
     this->raza = _raza;
 	this->vacuna = _vacuna;
+	this->tipo = PERRO;
+}
+
+TipoMascota dtPerro::getTipoMascota(){
+	return this->tipo;
 }
 
 bool dtPerro::getVacuna(){

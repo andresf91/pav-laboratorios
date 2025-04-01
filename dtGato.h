@@ -7,13 +7,12 @@
 class dtGato: public dtMascota{
     private:
     TipoPelo tipo;
-
+    TipoMascota _tipoMascota;
     public:
-    dtGato(string, Genero, )
-    void infoMascota();
-    float getRacionDiaria();
-    TipoMascota getTipo();
+    dtGato(string, Genero, float, TipoPelo);
+    TipoMascota getTipoMascota();
     TipoPelo getTipoPelo(); // Getter
+    ~dtGato();
 };
 
 #endif

@@ -8,7 +8,8 @@ enum Genero{
 
 enum TipoMascota{
     PERRO,
-    GATO
+    GATO,
+    OTRO
 };
 
 //DataType Perro

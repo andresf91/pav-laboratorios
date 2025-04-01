@@ -13,11 +13,11 @@ class dtMascota{
     Genero genero;
     float peso;
     float racion;
-
+    TipoMascota tipo;
     public:
-    dtMascota(string, Genero);
-    virtual void infoMascota(); // polimorfismo
-    virtual float getRacionDiaria();
+    dtMascota(string, Genero, float);
+    dtMascota(dtMascota*);
+    virtual TipoMascota getTipoMascota();
     string getNombre();
     Genero getGenero();
     float getPeso();

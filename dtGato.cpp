@@ -1,23 +1,16 @@
 #include "dtGato.h"
 
-dtGato::dtGato(string _nombre, Genero _genero, TipoPelo _tipoPelo):dtMascota(_nombre, _genero){
-	this->tipoPelo = _tipoPelo;
+dtGato::dtGato(string _nombre, Genero _genero, float _peso, TipoPelo _tipoPelo):dtMascota(_nombre, _genero, _peso){
+	this->tipo = _tipoPelo;
+	this->_tipoMascota = GATO;
 }
 
-float dtGato::getRacionDiaria(){
-	float _racion = getPeso() * 0.015;
-	setRacion(_racion);
-	return _racion;
+TipoMascota dtGato::getTipoMascota(){
+	return this->_tipoMascota;
 }
 
-TipoMascota dtGato::getTipo(){
-    return _tipo; 
-}
-
-
-
-TipoPelo Gato::getTipoPelo(){
-	return this->tipoPelo;
+TipoPelo dtGato::getTipoPelo(){
+	return this->tipo;
 }
 
 dtGato::~dtGato(){}

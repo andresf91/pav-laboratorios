@@ -21,8 +21,15 @@ Mascota::Mascota(string _nombre,Genero _genero, float _peso){
     this->racion = 0;
 }
 
-float Mascota::obtenerRacionDiaria(){
-	return racion;
+void Mascota::infoMascota(){
+	cout << "Nombre: " << getNombre() << endl;
+	cout << "Genero: " << getGenero() << endl;
+	cout << "Peso: " << getPeso() << endl;
+	cout << "Racion diaria: " << getRacionDiaria() << endl;
+}
+
+float Mascota::getRacionDiaria(){
+	return this->racion;
 }
 
 
@@ -37,6 +44,10 @@ Genero Mascota::getGenero(){
 
 float Mascota::getPeso(){
 	return this->peso;
+}
+
+float Mascota::getRacion(){
+	return this->racion;
 }
 
 Socio* Mascota::getSocio(){

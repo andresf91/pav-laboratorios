@@ -3,26 +3,32 @@
 
 using namespace std;
 
-Fecha::Fecha(int _dia, int _mes, int _anio){
+dtFecha::dtFecha(int _dia, int _mes, int _anio){
     this->dia = _dia;
     this->mes = _mes;
     this->anio = _anio;
 }
 
-int Fecha::getDia(){
+dtFecha::dtFecha(dtFecha* _fecha){
+	this->dia = _fecha->dia;
+	this->mes = _fecha->mes;
+	this->anio = _fecha->anio;
+}
+
+int dtFecha::getDia(){
     return this->dia;
 }
 
-int Fecha::getMes(){
+int dtFecha::getMes(){
     return this->mes;
 }
 
-int Fecha::getAnio(){
+int dtFecha::getAnio(){
     return this->anio;
 }
 
-void Fecha::imprimirFecha(){
+void dtFecha::imprimirFecha(){
     cout << getDia() << "/" << getMes() << "/" << getAnio() << endl;
 }
 
-Fecha::~Fecha(){}
+dtFecha::~dtFecha(){}
