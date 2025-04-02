@@ -1,4 +1,3 @@
-#include "mascota.h"
 #include "perro.h"
 #include <iostream>
 
@@ -8,7 +7,7 @@ Perro::Perro(string _nombre, Genero _genero, float _peso, Socio* _duenio, RazaPe
 	this->vacuna = _vacuna;
 }
 
-Perro::Perro(string _nombre, Genero _genero, float _peso,RazaPerro _raza, bool _vacuna):Mascota(_nombre, _genero, _peso){
+Perro::Perro(string _nombre, Genero _genero, float _peso, RazaPerro _raza, bool _vacuna):Mascota(_nombre, _genero, _peso){
     this->raza = _raza;
 	this->vacuna = _vacuna;
 }
@@ -19,6 +18,18 @@ Perro::Perro(dtPerro* _perro, Socio* _socio): Mascota(_perro->getNombre(), _perr
 	this->duenio = _socio;
 	this->raza = _perro->getRaza();
 	this->vacuna = _perro->getVacuna();
+}
+
+Perro::Perro(dtMascota* _mascota, RazaPerro _raza, bool _vacuna):Mascota(_mascota->getNombre(), _mascota->getGenero(), _mascota->getPeso()){
+	this->tipoMascota = PERRO;
+	this->racion = 0;
+	this->raza = _raza;
+	this->vacuna = _vacuna;
+}
+
+Perro::Perro(Perro* _perro): Mascota(_perro->getNombre(), _perro->getGenero(), _perro->getPeso()){
+	this->raza = _perro->raza;
+	this->vacuna = _perro->vacuna;
 }
 
 void Perro::infoMascota(){

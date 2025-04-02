@@ -17,7 +17,7 @@ class Consulta{
     public:
         // Consulta(); // Constructor por defecto
         Consulta(dtFecha, string, Socio*); // Constructor por pasaje de parámetros
-        Consulta(const Consulta&); // Constructor de copia
+        //Consulta(Consulta&); // Constructor de copia
         // Getters
         dtFecha& getFecha();
         string getMotivo();

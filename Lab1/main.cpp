@@ -48,7 +48,7 @@ dtMascota* recopilarDatosMascota();
 dtFecha* recopilarDatosFecha();
 
 // Recopilar los datos del socio
-void recopilarDatosSocio();
+Socio* recopilarDatosSocio();
 
 // Recorre el vector de socios y se fija si existe un socio con esa Ci
 bool existeSocioConCi(string _ci);
@@ -72,7 +72,7 @@ int main(){
 	menu();
 	//Mascota** mascotas;
 	//mascotas = socios[0].getMascotas();
-	//mascotas[0]->infoMascota();
+	//mascotas[0]->infoMascota(); 
     return 0;
 }
 
@@ -100,8 +100,14 @@ void menu(){
         			cout << "No se pueden registrar más socios." << endl;
         			break;
     			}
+    			Socio* nSocio = recopilarDatosSocio();
+				dtMascota* _Mascota = recopilarDatosMascota();
+				dtFecha __fecha = nSocio->getFecha();
+				dtFecha* _fecha = &__fecha;
+				registrarSocio(nSocio->getCi(), nSocio->getNombre(), _fecha, _Mascota);
 
-    			recopilarDatosSocio();
+				//delete _fecha;
+
 			    break;
 			}
 		case(2): 
@@ -327,7 +333,7 @@ void registrarSocio(string ci, string nombre, dtFecha* fechaIngreso, dtMascota* 
     		int indice = buscarSocioPorCi(ci);
 
     		// Verificar que no exista ya el CI
-		    if (indice != -1) {
+		    if (indice != -1) { //PRIMER -1
 		        cout << "Ya existe un socio con este CI." << endl;
 		        return;
 		    } 
@@ -336,11 +342,11 @@ void registrarSocio(string ci, string nombre, dtFecha* fechaIngreso, dtMascota* 
 			dtMascota mascota = dtMascota(_mascota);
 
 		    // Crear el socio y agregarlo al arreglo
-    		socios[indice] = new Socio(ci, nombre, fecha);
+    		socios[numSocios] = new Socio(ci, nombre, fecha);
     		/// Agregar la mascota al socio 
     		agregarMascota(ci, _mascota);
     		numSocios++;
-
+			//agregrar socio 
 		    cout << "La cantidad de socios actual es: " << numSocios << endl;
 }
 
@@ -355,7 +361,7 @@ dtFecha* recopilarDatosFecha(){
 	return fecha;
 }
 
-void recopilarDatosSocio(){
+Socio* recopilarDatosSocio(){
 
 	string _ci, _nombreSocio; 
 
@@ -371,15 +377,23 @@ void recopilarDatosSocio(){
 	        cout << "Documento del socio: " << endl;
 	        cout << "-> "; cin >> _ci;
 	    }
-	    
+
         }while(existeSocioConCi(_ci));
+		
         cout << "Nombre del socio: " << endl;
     	cout << "-> "; cin >> _nombreSocio;
-    	dtFecha* _fecha = recopilarDatosFecha();
-    	dtMascota* _mascota = recopilarDatosMascota();
+		
     	// registrar socio
-    	registrarSocio(_ci, _nombreSocio, _fecha, _mascota);
-    
+		//devolver registrar los datos de socio al main
+		int _dia, _mes, _anio;
+		cout << "Fecha de ingreso: " << endl;
+		cout << "* DIA de ingreso -> "; cin >> _dia;
+		cout << "* MES de ingreso -> "; cin >> _mes;
+		cout << "* AÑO de ingreso -> "; cin >> _anio;
+		dtFecha fecha(_dia,_mes,_anio);
+    	Socio *nuevosocio = new Socio(_ci, _nombreSocio, fecha);
+		return nuevosocio;
+		
 
 }
 
@@ -407,23 +421,113 @@ int buscarSocioPorCi(string ci){
 }
 
 void agregarMascota(string _ci, dtMascota* _mascota) {
+    
+	int _opcionRaza, _opcionVacuna;
+	RazaPerro _raza;
+	TipoPelo _tipoPelo;
+	bool vacuna;
+	char _opcionTipoDePelo;
+
+	//try{
     int indice = buscarSocioPorCi(_ci);
-    if (indice == -1) {
-        throw std::invalid_argument("Socio no encontrado");
-    }
+    //if (indice == -1) {
+    //    throw invalid_argument("Socio no encontrado");
+    //}
+
+    Socio* ptrSocio = socios[numSocios];//Estaba indice cambiamos por numSocios
 
     TipoMascota tipo = _mascota->getTipoMascota();
 
     if(tipo == PERRO){
-		dtPerro* dog = dynamic_cast<dtPerro*>(_mascota);
-		Perro* doggy = new Perro(dog, socios[indice]);
-		 socios[indice]->push_back(doggy);
-	}else if(tipo == GATO){
-		dtGato* cat = dynamic_cast<dtGato*>(_mascota);
-		Gato* kitty = new Gato(cat, socios[indice]);
-		 socios[indice]->push_back(kitty);
-	}
+        do{
+            cout << "¿De que raza es?" << endl;
+            cout << "0 - Labrador." << endl;
+            cout << "1 - Ovejero." << endl;
+            cout << "2 - Bulldog." << endl;
+            cout << "3 - Pitbull." << endl;
+            cout << "4 - Collie." << endl;
+            cout << "5 - Pekines." << endl;
+            cout << "6 - Otro." << endl;
+            cout << "-> "; cin >> _opcionRaza;
+            if(_opcionRaza < 0 || _opcionRaza > 6){
+            	cout << "Opcion incorrecta, intente nuevamente." << endl;
+            }
+        }while (_opcionRaza < 0 || _opcionRaza > 6);
+        
+        switch(_opcionRaza){
+        	case 0: _raza = Labrador; break;
+        	case 1: _raza = Ovejero; break;
+        	case 2: _raza = Bulldog; break;
+        	case 3: _raza = Pitbull; break;
+        	case 4: _raza = Collie; break;
+        	case 5: _raza = Pekines; break;
+        	case 6: _raza = Otro; break;
+        	default: cout << "Opcion incorrecta, intente nuevamente." << endl; break;
+        }
+
+        do{
+            cout << "¿Está vacunado?" << endl;
+            cout << "0 - Si." << endl << "1 - No" << endl;
+            cout << "-> "; cin >> _opcionVacuna; 
+            if(_opcionVacuna != 0 && _opcionVacuna != 1){
+            	cout << "Opcion incorrecta, intente nuevamente." << endl;
+            }
+
+            if(_opcionVacuna == 0){
+            	vacuna = true;
+            }else{
+            	vacuna=false;
+            }
+
+        }while (_opcionVacuna != 0 && _opcionVacuna != 1);
+        vacuna = (_opcionVacuna == 0);
+        Perro dogg = new Perro(_mascota, _raza, vacuna);
+        Perro* perro = &dogg;
+        ptrSocio->push_back_perro(perro);
+
+
+        /*Socio**/// ptrSocio = socios[numSocios];//Cambiar indice -> numSocios
+        //ptrSocio->push_back_gato(gato);
+        
+
+    } else if (tipo == GATO) {
+        do{
+            cout << "¿Qué tipo de pelo tiene? -> (L)argo, (M)ediano o (C)orto." << endl;
+            cout << "-> "; cin >> _opcionTipoDePelo;
+            if (_opcionTipoDePelo != 'l' && _opcionTipoDePelo != 'L' &&
+                 _opcionTipoDePelo != 'm' && _opcionTipoDePelo != 'M' &&
+                 _opcionTipoDePelo != 'c' && _opcionTipoDePelo != 'c'){
+            	cout << "Opcion incorrecta, intente nuevamente por favor." << endl;
+            }
+        }while(_opcionTipoDePelo != 'l' && _opcionTipoDePelo != 'L' &&
+                 _opcionTipoDePelo != 'm' && _opcionTipoDePelo != 'M' &&
+                 _opcionTipoDePelo != 'c' && _opcionTipoDePelo != 'c');
+		switch(_opcionTipoDePelo){//arreglado los tipos de pelo no se guardaban de forma correcta
+			case 'c' : _tipoPelo = Corto; break;
+			case 'C' : _tipoPelo = Corto; break;
+			case 'm' : _tipoPelo = Mediano; break;
+			case 'M' : _tipoPelo = Mediano; break;
+			case 'l' : _tipoPelo = Largo; break;
+			case 'L' : _tipoPelo = Largo; break;
+			default: cout << "opcion incorrecta" <<endl;
+
+		}
+		Gato cat = new Gato(_mascota, _tipoPelo);
+		Gato* gato = &cat;
+        /*Socio**/ //ptrSocio = socios[numSocios];//Cambiar indice -> numSocios
+        ptrSocio->push_back_gato(gato);
+       
+    }
+	//Mascota* ptrPet = ptrSocio->getMascotas()[0];
     cout << "Mascota agregada exitosamente." << endl;
+    //cout << ptrSocio->getNombre() << endl;
+    //cout << ptrPet->getNombre() << endl;
+    
+    	//}catch(invalid_argument& e){
+        // Capturar la excepción y manejarla
+      //  cerr << "Error: " << e.what() << endl;
+
+	//}
 }
 /*
 void ingresarConsulta(string motivo, string ci, Fecha fechaConsulta) {
@@ -474,15 +578,12 @@ bool esPrevia(Fecha* fecha1, Fecha* fecha2){
 
 dtMascota* recopilarDatosMascota(){
 
-	string _nombreMascota;
-	int _opcionRaza, _opcionVacuna;
-	RazaPerro _raza;
-	TipoPelo _tipoPelo;
 	Genero _genero;
-	bool vacuna;
 	float _peso;
-	char _opcionGenero, _tipoMascota, _opcionTipoDePelo;
+	char _opcionGenero;
+	string _nombreMascota;
 	dtMascota* mascota = nullptr;
+	char _tipoMascota;
 
 	cout << "***----- DATOS DE LA MASCOTA -----***" << endl;
 
@@ -500,82 +601,30 @@ dtMascota* recopilarDatosMascota(){
              _opcionGenero != 'H' && _opcionGenero != 'h');
     if (_opcionGenero == 'M' || _opcionGenero == 'm'){// antes !=m || != M // arreglado && -> ||
     	_genero = Macho;
-    }else if (_opcionGenero == 'h' || _opcionGenero == 'H'){// antes != h || != H // arreglado && -> ||
+    }else{
     	_genero = Hembra;
     }
 
+    do{
     cout << "Peso de su mascota: " << endl;
     cout << "-> "; cin >> _peso;
-	
-    cout << "¿Es (P)erro o (G)ato?" << endl;
+	}while(_peso < 0);
+	// revisar que sea INT
+
+     
     do{
+    	cout << "¿Es (P)erro o (G)ato?" << endl;
         cout << "-> "; cin >> _tipoMascota;
     }while (_tipoMascota != 'P' && _tipoMascota != 'p' &&
              _tipoMascota != 'G' && _tipoMascota != 'g');
 
-    // CREAR LA MASCOTA SEGÚN EL TIPO
-    if(_tipoMascota == 'P' || _tipoMascota == 'p'){
-        do{
-            cout << "¿De que raza es?" << endl;
-            cout << "0 - Labrador." << endl;
-            cout << "1 - Ovejero." << endl;
-            cout << "2 - Bulldog." << endl;
-            cout << "3 - Pitbull." << endl;
-            cout << "4 - Collie." << endl;
-            cout << "5 - Pekines." << endl;
-            cout << "6 - Otro." << endl;
-            cout << "-> "; cin >> _opcionRaza;
-            if(_opcionRaza < 0 || _opcionRaza > 6){
-            	cout << "Opcion incorrecta, intente nuevamente." << endl;
-            }
-        }while (_opcionRaza < 0 || _opcionRaza > 6);
-        
-        switch(_opcionRaza){
-        	case 0: _raza = Labrador; break;
-        	case 1: _raza = Ovejero; break;
-        	case 2: _raza = Bulldog; break;
-        	case 3: _raza = Pitbull; break;
-        	case 4: _raza = Collie; break;
-        	case 5: _raza = Pekines; break;
-        	case 6: _raza = Otro; break;
-        	default: cout << "Opcion incorrecta, intente nuevamente." << endl; break;
-        }
-
-        do{
-            cout << "¿Está vacunado?" << endl;
-            cout << "0 - Si." << endl << "1 - No" << endl;
-            cout << "-> "; cin >> _opcionVacuna; 
-            if(_opcionVacuna != 0 && _opcionVacuna != 1){
-            	cout << "Opcion incorrecta, intente nuevamente." << endl;
-            }
-        }while (_opcionVacuna != 0 && _opcionVacuna != 1);
-        vacuna = (_opcionVacuna == 0);
-
-        mascota = new dtPerro(_nombreMascota, _genero, _peso, _raza, vacuna);
-    } else if (_tipoMascota == 'G' || _tipoMascota == 'g') {
-        do{
-            cout << "¿Qué tipo de pelo tiene? -> (L)argo, (M)ediano o (C)orto." << endl;
-            cout << "-> "; cin >> _opcionTipoDePelo;
-            if (_opcionTipoDePelo != 'l' && _opcionTipoDePelo != 'L' &&
-                 _opcionTipoDePelo != 'm' && _opcionTipoDePelo != 'M' &&
-                 _opcionTipoDePelo != 'c' && _opcionTipoDePelo != 'c'){
-            	cout << "Opcion incorrecta, intente nuevamente por favor." << endl;
-            }
-        }while(_opcionTipoDePelo != 'l' && _opcionTipoDePelo != 'L' &&
-                 _opcionTipoDePelo != 'm' && _opcionTipoDePelo != 'M' &&
-                 _opcionTipoDePelo != 'c' && _opcionTipoDePelo != 'c');
-		switch(_opcionTipoDePelo){//arreglado los tipos de pelo no se guardaban de forma correcta
-			case 'c' : _tipoPelo = Corto; break;
-			case 'C' : _tipoPelo = Corto; break;
-			case 'm' : _tipoPelo = Mediano; break;
-			case 'M' : _tipoPelo = Mediano; break;
-			case 'l' : _tipoPelo = Largo; break;
-			case 'L' : _tipoPelo = Largo; break;
-			default: cout << "opcion incorrecta" <<endl;
-
-		}
-
-        mascota = new dtGato(_nombreMascota, _genero, _peso, _tipoPelo);//antes _tipoPelo //arreglado datos correctos
+    if (_tipoMascota == 'p' || _tipoMascota == 'p'){
+    	mascota = new dtMascota(_nombreMascota, _genero, _peso, PERRO);	
+    }else{
+    	mascota = new dtMascota(_nombreMascota, _genero, _peso, GATO);
     }
+
+    // CREAR LA MASCOTA SEGÚN EL TIPO
+    
     return mascota;
 }

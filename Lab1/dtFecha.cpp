@@ -14,6 +14,11 @@ dtFecha::dtFecha(dtFecha* _fecha){
 	this->mes = _fecha->mes;
 	this->anio = _fecha->anio;
 }
+dtFecha::dtFecha(dtFecha& _fecha){
+	this->dia = _fecha.dia;
+	this->mes = _fecha.mes;
+	this->anio = _fecha.anio;
+}
 
 int dtFecha::getDia(){
     return this->dia;

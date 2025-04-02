@@ -16,8 +16,9 @@ class dtMascota{
     TipoMascota tipo;
     public:
     dtMascota(string, Genero, float);
+    dtMascota(string, Genero, float, TipoMascota);
     dtMascota(dtMascota*);
-    virtual TipoMascota getTipoMascota();
+    TipoMascota getTipoMascota();
     string getNombre();
     Genero getGenero();
     float getPeso();

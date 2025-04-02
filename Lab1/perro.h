@@ -1,10 +1,12 @@
 #ifndef PERRO_H
 #define PERRO_H
 
+class Mascota;
+class Socio;
+
 #include "mascota.h"
 #include "dtMascota.h"
 #include "dtPerro.h"
-
 
 class Perro: public Mascota{
     private:
@@ -16,6 +18,8 @@ class Perro: public Mascota{
         Perro(string, Genero, float, Socio*, RazaPerro, bool);
         Perro(string, Genero, float, RazaPerro, bool);
         Perro(dtPerro*, Socio*);
+        Perro(Perro*);
+        Perro(dtMascota*, RazaPerro, bool);
         void infoMascota();
         float getRacionDiaria();
         // Getters

@@ -1,8 +1,12 @@
 #ifndef SOCIO_H
 #define SOCIO_H
-#include <string.h>
+#include <string>
 #include "dtFecha.h"
+
+using namespace std;
 #include "mascota.h"
+#include "perro.h"
+#include "gato.h"
 #include "consulta.h"
 
 #define MAX_MASCOTAS 10 // Tamaño máximo de mascotas por socio
@@ -29,11 +33,13 @@ class Socio{
         // Getters
         string getCi();
         string getNombre();
+        dtFecha getFecha();
         Mascota** getMascotas(); // Retorna el arreglo de Mascotas
         int getNumMascotas();
         Consulta** getConsultas(); // Retorna el arreglo de Consultas
         int getNumConsultas();
-        void push_back(Mascota*);
+        void push_back_perro(Perro*);
+        void push_back_gato(Gato*);
         void agregarConsulta(Consulta* consulta);
         ~Socio(); // Destructor
 };

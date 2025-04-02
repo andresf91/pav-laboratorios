@@ -18,6 +18,14 @@ dtMascota::dtMascota(dtMascota* _mascota){
 	this->tipo = OTRO;
 }
 
+dtMascota::dtMascota(string _nombre, Genero _genero, float _peso, TipoMascota _tipo){
+	this->nombre = _nombre;
+    this->genero = _genero;
+    this->peso = _peso;
+    this->racion = 0;
+    this->tipo = _tipo;
+}
+
 TipoMascota dtMascota::getTipoMascota(){
 	return this->tipo;
 }

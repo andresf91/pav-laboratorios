@@ -12,10 +12,6 @@ dtPerro::dtPerro(string _nombre, Genero _genero, float _peso,RazaPerro _raza, bo
 	this->tipo = PERRO;
 }
 
-TipoMascota dtPerro::getTipoMascota(){
-	return this->tipo;
-}
-
 bool dtPerro::getVacuna(){
 	return this->vacuna;
 }

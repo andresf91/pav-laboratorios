@@ -2,18 +2,20 @@
 #define MASCOTA_H
 #include <string>
 #include "defMascotas.h"
-#include "socio.h"
+//#include "socio.h"
+
 
 class Socio;
 
 using namespace std;
 
-class Mascota {
+class Mascota{
     protected:
         string nombre;
         Genero genero;
         float peso;
         float racion;
+        TipoMascota tipoMascota = OTRO;
         Socio* duenio;
     public:
     //Mascota(); Constructor por defecto
@@ -27,6 +29,7 @@ class Mascota {
     Genero getGenero();
     float getPeso();
     float getRacion();
+    TipoMascota getTipoMascota();
     Socio* getSocio();
     void setDuenio(Socio*);
     void setRacion(float);

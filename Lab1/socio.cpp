@@ -3,9 +3,19 @@
 #include "consulta.h"
 #include <stdexcept> // Para std::runtime_error
 
-Socio::Socio() : ci(""), nombre(""), fechaIngreso(dtFecha(1,1,2025)), numMascotas(0), numConsultas(0){}
+Socio::Socio() : ci(""), nombre(""), fechaIngreso(1,1,2025), numMascotas(0), numConsultas(0){
+    for (int i = 0; i < MAX_MASCOTAS; ++i)
+        mascotas[i] = nullptr;
+    for (int i = 0; i < MAX_CONSULTAS; ++i)
+        consultas[i] = nullptr;
+}
 
-Socio::Socio(std::string _ci, std::string _nombre, dtFecha _fecha): ci(_ci), nombre(_nombre), fechaIngreso(_fecha), numMascotas(0), numConsultas(0) {}
+Socio::Socio(std::string _ci, std::string _nombre, dtFecha _fecha): ci(_ci), nombre(_nombre), fechaIngreso(_fecha), numMascotas(0), numConsultas(0) {
+    for (int i = 0; i < MAX_MASCOTAS; ++i)
+        mascotas[i] = nullptr;
+    for (int i = 0; i < MAX_CONSULTAS; ++i)
+        consultas[i] = nullptr;
+}
 
 string Socio::getCi(){
 	return this->ci;
@@ -20,7 +30,7 @@ Mascota** Socio::getMascotas(){  // Retorna el arreglo
  }
 
 int Socio::getNumMascotas(){
-  return numMascotas;
+  return this->numMascotas;
 }
 
 Consulta** Socio::getConsultas(){ // Retorna el arreglo
@@ -31,14 +41,26 @@ int Socio::getNumConsultas(){
 	return numConsultas;
 }
 
-void Socio::push_back(Mascota* mascota){
-    Mascota* ptrMascota= mascota;
-    if (numMascotas < MAX_MASCOTAS) {
-        mascotas[numMascotas] = ptrMascota;
-        numMascotas++;
-    } else {
-        throw std::runtime_error("No hay espacio para más mascotas");
-    }
+void Socio::push_back_perro(Perro* mascota){
+   // Mascota* ptrMascota= mascota;
+    if (this->getNumMascotas() < MAX_MASCOTAS) {
+    
+           Perro* nuevoPerro = new Perro(mascota);
+            mascotas[numMascotas] = nuevoPerro;
+   }
+    numMascotas++;
+
+}
+
+void Socio::push_back_gato(Gato* mascota){
+   // Mascota* ptrMascota= mascota;
+    if (this->getNumMascotas() < MAX_MASCOTAS) {
+    
+           Gato* nuevoGato = new Gato(mascota);
+            mascotas[numMascotas] = nuevoGato;
+   }
+    numMascotas++;
+
 }
 
 void Socio::agregarConsulta(Consulta* consulta) { // <<--- Usa Socio::
@@ -48,6 +70,10 @@ void Socio::agregarConsulta(Consulta* consulta) { // <<--- Usa Socio::
     } else {
         throw std::runtime_error("No hay espacio para más consultas");
     }
+}
+
+dtFecha Socio::getFecha() {
+    return this->fechaIngreso;
 }
 
 // Destructor para liberar la memoria

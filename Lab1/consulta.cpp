@@ -6,7 +6,7 @@
 using namespace std;
 
 Consulta::Consulta(dtFecha _fecha, string _motivo, Socio* _socio):fechaConsulta(_fecha),motivo(_motivo),socio(_socio){}
-Consulta::Consulta (const Consulta& c):fechaConsulta(c.fechaConsulta),motivo(c.motivo),socio(c.socio){}
+// Consulta::Consulta (Consulta& c):fechaConsulta(c.fechaConsulta),motivo(c.motivo),socio(c.socio){}
 
 dtFecha& Consulta::getFecha(){
 	return this->fechaConsulta;

@@ -32,6 +32,9 @@ float Mascota::getRacionDiaria(){
 	return this->racion;
 }
 
+TipoMascota Mascota::getTipoMascota(){
+	return this->tipoMascota;
+}
 
 
 string Mascota::getNombre(){

@@ -5,10 +5,6 @@ dtGato::dtGato(string _nombre, Genero _genero, float _peso, TipoPelo _tipoPelo):
 	this->_tipoMascota = GATO;
 }
 
-TipoMascota dtGato::getTipoMascota(){
-	return this->_tipoMascota;
-}
-
 TipoPelo dtGato::getTipoPelo(){
 	return this->tipo;
 }

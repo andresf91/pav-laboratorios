@@ -17,6 +17,16 @@ Gato::Gato(dtGato* _gato, Socio* _socio): Mascota(_gato->getNombre(), _gato->get
 	this->tipoPelo = _gato->getTipoPelo();
 }
 
+Gato::Gato(dtMascota* _mascota, TipoPelo _tipo):Mascota(_mascota->getNombre(), _mascota->getGenero(), _mascota->getPeso()){
+	this->tipoMascota = GATO;
+	this->racion = 0;
+	this->tipoPelo = _tipo;
+}
+
+Gato::Gato(Gato* _gato): Mascota(_gato->getNombre(), _gato->getGenero(), _gato->getPeso()){
+	this->tipoPelo = _gato->tipoPelo;
+}
+
 void Gato::infoMascota(){
 	Mascota::infoMascota();
 	cout << "Tipo de pelo: " << getTipoPelo() << endl;
@@ -27,12 +37,6 @@ float Gato::getRacionDiaria(){
 	setRacion(_racion);
 	return _racion;
 }
-
-TipoMascota Gato::getTipo(){
-    return _tipo; 
-}
-
-
 
 TipoPelo Gato::getTipoPelo(){
 	return this->tipoPelo;

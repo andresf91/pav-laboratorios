@@ -10,7 +10,6 @@ class dtGato: public dtMascota{
     TipoMascota _tipoMascota;
     public:
     dtGato(string, Genero, float, TipoPelo);
-    TipoMascota getTipoMascota();
     TipoPelo getTipoPelo(); // Getter
     ~dtGato();
 };

@@ -9,6 +9,7 @@ class dtFecha{
     public:
         dtFecha(int, int, int);
         dtFecha(dtFecha*);
+        dtFecha(dtFecha&);
         int getDia();
         int getMes();
         int getAnio(); 
