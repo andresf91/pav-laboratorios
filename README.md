@@ -3,7 +3,7 @@
 ## Clonar un Repositorio
 Para obtener una copia local de un repositorio alojado en GitHub, usar:
 ```sh
-git clone https://github.com/andresf91/pav-laboratorios.git
+git clone git@github.com:andresf91/pav-laboratorios.git
 ```
 
 ## Agregar, Confirmar y Enviar Cambios
