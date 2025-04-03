@@ -1,0 +1,35 @@
+{
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "Compilar Proyecto C++ (MinGW)",
+            "command": "C:/msys64/mingw64/bin/g++.exe",
+            "args": [
+                "-g",
+                "${workspaceFolder}/main.cpp",
+                "${workspaceFolder}/socio.cpp",
+                "${workspaceFolder}/consulta.cpp",
+                "${workspaceFolder}/mascota.cpp",
+                "${workspaceFolder}/dtFecha.cpp",
+                "${workspaceFolder}/dtMascota.cpp",
+                "${workspaceFolder}/dtPerro.cpp",
+                "${workspaceFolder}/dtGato.cpp",
+                "${workspaceFolder}/perro.cpp",
+                "${workspaceFolder}/gato.cpp",
+                "-o",
+                "${workspaceFolder}/main.exe"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": ["$gcc"],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Compilación de proyecto con múltiples archivos."
+        }
+    ],
+    "version": "2.0.0"
+}
+
