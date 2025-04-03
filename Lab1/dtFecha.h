@@ -10,6 +10,7 @@ class dtFecha{
         dtFecha(int, int, int);
         dtFecha(dtFecha*);
         dtFecha(dtFecha&);
+        dtFecha(const dtFecha&); // Constructor por copia con const
         int getDia();
         int getMes();
         int getAnio(); 

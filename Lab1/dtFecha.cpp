@@ -20,6 +20,13 @@ dtFecha::dtFecha(dtFecha& _fecha){
 	this->anio = _fecha.anio;
 }
 
+dtFecha::dtFecha(const dtFecha& otro) { // Constructor por copia con const
+    this->dia = otro.dia;
+    this->mes = otro.mes;
+    this->anio = otro.anio;
+}
+
+
 int dtFecha::getDia(){
     return this->dia;
 }
