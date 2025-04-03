@@ -628,11 +628,15 @@ dtMascota* recopilarDatosMascota(){
     	_genero = Hembra;
     }
 
-    do{
-    cout << "Peso de su mascota: " << endl;
-    cout << "-> "; cin >> _peso;
-	}while(_peso < 0);
-	// revisar que sea INT
+	do {
+		cout << "Peso de su mascota: " << endl;
+		cout << "-> "; cin >> _peso;
+		if (cin.fail() || _peso < 0) {
+			cin.clear(); // Clear the error flag
+			cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Discard invalid input
+			cout << "Entrada inválida. Por favor, ingrese un número positivo." << endl;
+		}
+	} while (cin.fail() || _peso < 0);
 
      
     do{
