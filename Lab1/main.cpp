@@ -53,10 +53,11 @@ Socio* recopilarDatosSocio();
 // Recorre el vector de socios y se fija si existe un socio con esa Ci
 bool existeSocioConCi(string _ci);
 
+int buscarSocioPorCi(string ci);
+
 // Verifica si hay espacio en el arreglo de socios.
 bool hayEspacio();
 
-int buscarSocioPorCi(string ci);
 
 bool esPrevia (Fecha* fecha1, Fecha* fecha2);
 // Comprar 2 fechas y devuelve True fecha1 < fecha2
@@ -110,8 +111,23 @@ void menu(){
 
 			    break;
 			}
-		case(2): 
-			/*{
+		case(2):
+
+			{
+				string ci;
+                if (numSocios == 0) {
+                    cout << "No hay socios registrados." << endl;
+                    break;
+                }
+                cout << "----- DATOS DEL SOCIO -----" << endl;                cout << "Documento del socio: ";
+                cin >> ci;
+                    if(existeSocioConCi(ci)){
+                        dtMascota* _Mascota = recopilarDatosMascota();
+                        agregarMascota(ci, _Mascota);                   
+                }
+			}
+			/*
+			{
 				if (numSocios == 0) {
 			        cout << "No hay socios registrados." << endl;
 			        break;
@@ -429,16 +445,23 @@ void agregarMascota(string _ci, dtMascota* _mascota) {
 	char _opcionTipoDePelo;
 
 	//try{
-    int indice = buscarSocioPorCi(_ci);
-    //if (indice == -1) {
-    //    throw invalid_argument("Socio no encontrado");
+    if(numSocios > 0){}
+   // if (indice == -1) {
+   //     throw invalid_argument("Socio no encontrado");
     //}
+	Socio* ptrSocio;
+	if(numSocios == 0){
+		ptrSocio = socios[numSocios];//Estaba indice cambiamos por numSocios
+	}else{
+		int indice = buscarSocioPorCi(_ci);
+		ptrSocio = socios[indice];		
+	}
 
-    Socio* ptrSocio = socios[numSocios];//Estaba indice cambiamos por numSocios
 
     TipoMascota tipo = _mascota->getTipoMascota();
 
     if(tipo == PERRO){
+		
         do{
             cout << "¿De que raza es?" << endl;
             cout << "0 - Labrador." << endl;
@@ -496,12 +519,12 @@ void agregarMascota(string _ci, dtMascota* _mascota) {
             cout << "-> "; cin >> _opcionTipoDePelo;
             if (_opcionTipoDePelo != 'l' && _opcionTipoDePelo != 'L' &&
                  _opcionTipoDePelo != 'm' && _opcionTipoDePelo != 'M' &&
-                 _opcionTipoDePelo != 'c' && _opcionTipoDePelo != 'c'){
+                 _opcionTipoDePelo != 'c' && _opcionTipoDePelo != 'C'){
             	cout << "Opcion incorrecta, intente nuevamente por favor." << endl;
             }
         }while(_opcionTipoDePelo != 'l' && _opcionTipoDePelo != 'L' &&
                  _opcionTipoDePelo != 'm' && _opcionTipoDePelo != 'M' &&
-                 _opcionTipoDePelo != 'c' && _opcionTipoDePelo != 'c');
+                 _opcionTipoDePelo != 'c' && _opcionTipoDePelo != 'C');
 		switch(_opcionTipoDePelo){//arreglado los tipos de pelo no se guardaban de forma correcta
 			case 'c' : _tipoPelo = Corto; break;
 			case 'C' : _tipoPelo = Corto; break;
@@ -618,10 +641,13 @@ dtMascota* recopilarDatosMascota(){
     }while (_tipoMascota != 'P' && _tipoMascota != 'p' &&
              _tipoMascota != 'G' && _tipoMascota != 'g');
 
-    if (_tipoMascota == 'p' || _tipoMascota == 'p'){
-    	mascota = new dtMascota(_nombreMascota, _genero, _peso, PERRO);	
+    if (_tipoMascota == 'p' || _tipoMascota == 'P'){	
+    	mascota = new dtMascota(_nombreMascota, _genero, _peso, PERRO);
+		//dtPerro::dtPerro(string _nombre, Genero _genero, float _peso, TipoMascota _tipo):dtMascota(_nombre, _genero,_peso) 
+
     }else{
     	mascota = new dtMascota(_nombreMascota, _genero, _peso, GATO);
+		//dtGato::dtGato(string _nombre, Genero _genero, float _peso,TipoMascota _tipoMascota):dtMascota(_nombre, _genero, _peso) NUEVO CONSTRUCTOR
     }
 
     // CREAR LA MASCOTA SEGÚN EL TIPO

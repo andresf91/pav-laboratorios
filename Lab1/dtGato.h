@@ -2,7 +2,6 @@
 #define DTGATO_H
 
 #include "dtMascota.h"
-#include "defMascotas.h"
 
 class dtGato: public dtMascota{
     private:
@@ -10,6 +9,7 @@ class dtGato: public dtMascota{
     TipoMascota _tipoMascota;
     public:
     dtGato(string, Genero, float, TipoPelo);
+    dtGato(string, Genero, float, TipoMascota);
     TipoPelo getTipoPelo(); // Getter
     ~dtGato();
 };

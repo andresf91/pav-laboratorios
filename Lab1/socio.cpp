@@ -54,7 +54,7 @@ void Socio::push_back_perro(Perro* mascota){
 
 void Socio::push_back_gato(Gato* mascota){
    // Mascota* ptrMascota= mascota;
-    if (this->getNumMascotas() < MAX_MASCOTAS) {
+    if (numMascotas < MAX_MASCOTAS) {
     
            Gato* nuevoGato = new Gato(mascota);
             mascotas[numMascotas] = nuevoGato;

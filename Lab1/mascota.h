@@ -15,7 +15,7 @@ class Mascota{
         Genero genero;
         float peso;
         float racion;
-        TipoMascota tipoMascota = OTRO;
+        TipoMascota tipoMascota;
         Socio* duenio;
     public:
     //Mascota(); Constructor por defecto

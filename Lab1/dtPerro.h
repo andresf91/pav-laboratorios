@@ -10,9 +10,10 @@ class dtPerro: public dtMascota{
     private:
     RazaPerro raza;
     bool vacuna;
-    TipoMascota tipo;
+    TipoMascota _tipoMascota;
     public:
     dtPerro(string, Genero, float, RazaPerro, bool);
+    dtPerro(string, Genero, float, TipoMascota);
     TipoMascota getTipoMascota();
     RazaPerro getRaza();
     bool getVacuna();
